@@ -11,18 +11,15 @@ def add_new_book(library: Library) -> None:
         year = int(input("Введите год издания книги: "))
         library.add_book(title=title, author=author, year=year)
     except ValueError:
-        print("Неправильный год. Введите год в числом\n")
+        print("Неправильный год. Введите год числом\n")
 
 
 def delete_book(library: Library) -> None:
     """
     Удаление книги из библиотеки
     """
-    try:
-        book_id = int(input("Введите номер книги которую нужно удалить: "))
-        library.remove_book(book_id=book_id)
-    except ValueError:
-        print("Не верный номер книги!\n")
+    book_id = int(input("Введите номер книги которую нужно удалить: "))
+    library.remove_book(book_id=book_id)
 
 
 def find_books(library: Library) -> None:
