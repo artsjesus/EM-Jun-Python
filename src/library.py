@@ -11,7 +11,8 @@ class Book:
         self.status = status
 
     def __str__(self):
-        return f"id книги: {self.book_id}"
+        return (f"Номер книги: {self.book_id}\nНазвание: {self.title}\n"
+                f"Автор: {self.author}\nГод издания: {self.year}\nНаличие книги: {self.status}\n")
 
 
 class Library:
@@ -31,16 +32,16 @@ class Library:
         book_id = max((book.book_id for book in self.book), default=0) + 1
         self.book.append(Book(book_id=book_id, title=title, author=author, year=year, status=True))
         self.save_book()
-        print(f"Книга добавлена")
+        print(f"Книга добавлена присвоен номер {book_id}")
 
     def remove_book(self, book_id: int):
         book_to_delete = next((book for book in self.book if book.book_id == book_id), None)
         if book_to_delete:
             self.book.remove(book_to_delete)
             self.save_book()
-            print(f"Книга с ID {book_id} удалена \n")
+            print(f"Книга с номером {book_id} удалена \n")
         else:
-            print(f"Книга с ID {book_id} не найдена\n")
+            print(f"Книга с номером {book_id} не найдена\n")
 
     def show_all_book(self) -> List[Book]:
         return self.book
@@ -61,10 +62,10 @@ class Library:
             current_book.status = new_status
             self.save_book()
             if new_status is True:
-                status_text = 'in stock'
+                status_text = "В наличии"
             else:
-                status_text = 'has been issued'
+                status_text = "Выдана"
 
-            print(f'Book with Id {book_id} changed status to "{status_text}"\n')
+            print(f"У книги с номером {book_id} изменился статус на {status_text}\n")
         except ValueError:
-            print(f'Book with Id {book_id} not found\n')
+            print(f"Книга с номером {book_id} не найдена\n")

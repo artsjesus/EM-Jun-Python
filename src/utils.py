@@ -59,8 +59,7 @@ def show_all_books(library: Library) -> None:
     books = library.show_all_book()
     if books:
         for book in books:
-            print(f"Номер книги: {book.book_id}\nНазвание: {book.title}\n"
-                  f"Автор: {book.author}\nГод издания: {book.year}\nНаличие книги: {book.status}\n")
+            print(book)
     else:
         print("Нет книг в библиотеке\n")
 
