@@ -34,7 +34,6 @@ def find_books(library: Library) -> None:
 
     if field not in valid_fields:
         print(f"Недопустимое поле {field}. Пожалуйста, выберите из {', '.join(valid_fields)}.\n")
-        return
 
     value = input(f"Введите {field}: ")
     if field == "year":
@@ -42,7 +41,6 @@ def find_books(library: Library) -> None:
             value = int(value)
         except ValueError:
             print("Год должен быть числом. Пожалуйста, попробуйте еще раз.\n")
-            return
 
     found_books = library.search_books(**{field: value})
     if found_books:
