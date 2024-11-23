@@ -66,18 +66,15 @@ def update_book_status(library: Library) -> None:
     """
     Изменение статуса книги
     """
-    try:
-        book_id = int(input("Введите номер книги, статус которой хотите изменить: "))
-        print('1: Книга в наличии\n'
-              '2: Книга выдана')
-        user_status = int(input("Выберите статус (1/2): "))
-        if user_status == 1:
-            book_status = True
-        elif user_status == 2:
-            book_status = False
-        else:
-            print("Неверный выбор. Пожалуйста, введите 1 или 2.\n")
-            return
+    book_id = int(input("Введите номер книги, статус которой хотите изменить: "))
+    print('1: Книга в наличии\n'
+          '2: Книга выдана')
+    user_status = int(input("Выберите статус (1/2): "))
+    if user_status == 1:
+        book_status = True
         library.update_status_book(book_id=book_id, new_status=book_status)
-    except ValueError:
-        print("Неверный ввод. Введите числовые значения идентификатора и статуса.\n")
+    elif user_status == 2:
+        book_status = False
+        library.update_status_book(book_id=book_id, new_status=book_status)
+    else:
+        print("Неверный выбор. Пожалуйста, введите 1 или 2.\n")
