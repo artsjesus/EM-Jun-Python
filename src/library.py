@@ -1,6 +1,6 @@
 import json
 from typing import List
-
+import os
 
 class Book:
     def __init__(self, book_id: int, title: str, author: str, year: int, status: bool):
@@ -16,7 +16,7 @@ class Book:
 
 
 class Library:
-    def __init__(self, file_name):
+    def __init__(self, file_name: str):
         self.file_name = file_name
         self.book: List[Book] = self.load_book()
 
@@ -25,14 +25,16 @@ class Library:
         Загружает книги из файла JSON
         :return:  список книг
         """
-        with open(f"data/{self.file_name}", 'r', encoding='utf-8') as file:
+        file_path = os.path.join("data", self.file_name)
+        with open(file_path, 'r', encoding='utf-8') as file:
             return [Book(**book) for book in json.load(file)]
 
     def save_book(self):
         """
         Сохраняет текущий список книг в файл JSON
         """
-        with open(f"data/{self.file_name}", "w", encoding="utf-8") as f:
+        file_path = os.path.join("data", self.file_name)
+        with open(file_path, "w", encoding="utf-8") as f:
             json.dump([book.__dict__ for book in self.book], f, ensure_ascii=False, indent=4)
 
     def add_book(self, title, author, year):
