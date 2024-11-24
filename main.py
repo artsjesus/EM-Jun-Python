@@ -4,28 +4,34 @@ from src.utils import add_new_book, delete_book, find_books, show_all_books, upd
 
 def main() -> None:
     library = Library("books.json")
+    menu_options = {
+        1: ("Добавить книгу", add_new_book),
+        2: ("Удалить книгу", delete_book),
+        3: ("Найти книгу", find_books),
+        4: ("Показать все книги", show_all_books),
+        5: ("Изменить статус книги", update_book_status),
+        6: ("Выйти", None)
+    }
+
     while True:
-        answer = int(input("Выберите команду по номеру:\n"
-                           "1: Добавить книгу\n"
-                           "2: Удалить книгу\n"
-                           "3: Найти книгу\n"
-                           "4: Показать все книги\n"
-                           "5: Изменить статус книги\n"
-                           "6: Выйти\n"
-                           "Команда: "))
-        if answer == 1:
-            add_new_book(library)
-        if answer == 2:
-            delete_book(library)
-        if answer == 3:
-            find_books(library)
-        if answer == 4:
-            show_all_books(library)
-        if answer == 5:
-            update_book_status(library)
-        if answer == 6:
-            print("Хорошего дня")
-            exit()
+        print("Выберите команду по номеру: ")
+        for key, (description, _) in menu_options.items():
+            print(f"{key}: {description}")
+
+        try:
+            answer = int(input("Команда: "))
+            if answer not in menu_options:
+                raise ValueError("Не верный номер команды")
+
+            if answer == 6:
+                print("Хорошего дня!")
+                break
+
+            selected_function = menu_options[answer][1]
+            selected_function(library)
+
+        except ValueError:
+            print(f"Ошибка: Пожалуйста введите команду числом\n")
 
 
 if __name__ == '__main__':
