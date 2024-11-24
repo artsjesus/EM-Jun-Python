@@ -78,10 +78,10 @@ def update_book_status(library: Library) -> None:
     try:
         if user_status == 1:
             library.update_status_book(book_id=book_id, new_status=True)
-            print(f"У книги с номером {book_id} изменился статус на {user_status}\n")
+            print(f"У книги с номером {book_id} изменился статус на в наличии\n")
         elif user_status == 2:
             library.update_status_book(book_id=book_id, new_status=False)
-            print(f"У книги с номером {book_id} изменился статус на {user_status}\n")
+            print(f"У книги с номером {book_id} изменился статус на выдана\n")
         else:
             print("Неверный выбор. Пожалуйста, введите 1 или 2.\n")
     except AttributeError:
