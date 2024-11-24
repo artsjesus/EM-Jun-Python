@@ -34,18 +34,18 @@ def find_books(library: Library) -> None:
     Поиск книги
     """
     valid_fields = {"title", "author", "year"}  # Допустимые поля для поиска
-    field = input("Поиск по (title/author/year): ").lower()
-
-    if field not in valid_fields:
-        print(f"Недопустимое поле {field}. Пожалуйста, выберите из {', '.join(valid_fields)}.\n")
     while True:
-        value = input(f"Введите {field}: ")
-        if field == "year":
-            try:
-                value = int(value)
-                break
-            except ValueError:
-                print("Год должен быть числом. Пожалуйста, попробуйте еще раз.\n")
+        field = input("Поиск по (title/author/year): ").lower()
+        if field not in valid_fields:
+            print(f"Недопустимое поле {field}. Пожалуйста, выберите из {', '.join(valid_fields)}.\n")
+        else:
+            break
+    value = input(f"Введите {field}: ")
+    if field == "year":
+        try:
+            value = int(value)
+        except ValueError:
+            print("Год должен быть числом. Пожалуйста, попробуйте еще раз.\n")
 
     found_books = library.search_books(**{field: value})
     if found_books:
