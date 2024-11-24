@@ -7,12 +7,14 @@ def add_new_book(library: Library) -> None:
     """
     title = input("Введите название книги: ")
     author = input("Введите автора книги: ")
-    try:
-        year = int(input("Введите год издания книги: "))
-        library.add_book(title=title, author=author, year=year)
-        print(f"Книга добавлена\n")
-    except ValueError:
-        print("Неправильный год. Введите год числом\n")
+    while True:
+        try:
+            year = int(input("Введите год издания книги: "))
+            library.add_book(title=title, author=author, year=year)
+            print(f"Книга добавлена\n")
+            break
+        except ValueError:
+            print("Неправильный год. Введите год числом\n")
 
 
 def delete_book(library: Library) -> None:
@@ -36,13 +38,14 @@ def find_books(library: Library) -> None:
 
     if field not in valid_fields:
         print(f"Недопустимое поле {field}. Пожалуйста, выберите из {', '.join(valid_fields)}.\n")
-
-    value = input(f"Введите {field}: ")
-    if field == "year":
-        try:
-            value = int(value)
-        except ValueError:
-            print("Год должен быть числом. Пожалуйста, попробуйте еще раз.\n")
+    while True:
+        value = input(f"Введите {field}: ")
+        if field == "year":
+            try:
+                value = int(value)
+                break
+            except ValueError:
+                print("Год должен быть числом. Пожалуйста, попробуйте еще раз.\n")
 
     found_books = library.search_books(**{field: value})
     if found_books:
