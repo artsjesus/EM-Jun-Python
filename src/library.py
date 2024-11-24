@@ -45,7 +45,6 @@ class Library:
         book_id = max((book.book_id for book in self.book), default=0) + 1
         self.book.append(Book(book_id=book_id, title=title, author=author, year=year, status=True))
         self.save_book()
-        print(f"Книга добавлена присвоен номер {book_id}")
 
     def remove_book(self, book_id: int):
         """
@@ -53,12 +52,8 @@ class Library:
         Удаляет книгу из библиотеки по ее ID.
         """
         book_to_delete = next((book for book in self.book if book.book_id == book_id), None)
-        if book_to_delete:
-            self.book.remove(book_to_delete)
-            self.save_book()
-            print(f"Книга с номером {book_id} удалена \n")
-        else:
-            print(f"Книга с номером {book_id} не найдена\n")
+        self.book.remove(book_to_delete)
+        self.save_book()
 
     def show_all_book(self) -> List[Book]:
         """
@@ -87,13 +82,6 @@ class Library:
         Изменяет статус книги.
         """
         current_book = next((book for book in self.book if book.book_id == book_id), None)
-        if current_book:
-            current_book.status = new_status
-            self.save_book()
-            if new_status is True:
-                status_text = "В наличии"
-            else:
-                status_text = "Выдана"
-            print(f"У книги с номером {book_id} изменился статус на {status_text}\n")
-        else:
-            print(f"Книга с номером {book_id} не найдена\n")
+
+        current_book.status = new_status
+        self.save_book()

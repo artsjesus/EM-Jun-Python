@@ -10,6 +10,7 @@ def add_new_book(library: Library) -> None:
     try:
         year = int(input("Введите год издания книги: "))
         library.add_book(title=title, author=author, year=year)
+        print(f"Книга добавлена\n")
     except ValueError:
         print("Неправильный год. Введите год числом\n")
 
@@ -19,7 +20,11 @@ def delete_book(library: Library) -> None:
     Удаление книги из библиотеки
     """
     book_id = int(input("Введите номер книги которую нужно удалить: "))
-    library.remove_book(book_id=book_id)
+    try:
+        library.remove_book(book_id=book_id)
+        print(f"Книга с номером {book_id} удалена \n")
+    except AttributeError:
+        print(f"Книга с номером {book_id} не найдена\n")
 
 
 def find_books(library: Library) -> None:
@@ -67,11 +72,14 @@ def update_book_status(library: Library) -> None:
     print('1: Книга в наличии\n'
           '2: Книга выдана')
     user_status = int(input("Выберите статус (1/2): "))
-    if user_status == 1:
-        book_status = True
-        library.update_status_book(book_id=book_id, new_status=book_status)
-    elif user_status == 2:
-        book_status = False
-        library.update_status_book(book_id=book_id, new_status=book_status)
-    else:
-        print("Неверный выбор. Пожалуйста, введите 1 или 2.\n")
+    try:
+        if user_status == 1:
+            library.update_status_book(book_id=book_id, new_status=True)
+            print(f"У книги с номером {book_id} изменился статус на {user_status}\n")
+        elif user_status == 2:
+            library.update_status_book(book_id=book_id, new_status=False)
+            print(f"У книги с номером {book_id} изменился статус на {user_status}\n")
+        else:
+            print("Неверный выбор. Пожалуйста, введите 1 или 2.\n")
+    except AttributeError:
+        print(f"Книга с номером {book_id} не найдена\n")
