@@ -2,6 +2,7 @@ import json
 from typing import List
 import os
 
+
 class Book:
     def __init__(self, book_id: int, title: str, author: str, year: int, status: bool):
         self.book_id = book_id
@@ -45,17 +46,24 @@ class Library:
         Добавляет новую книгу в библиотеку.
         """
         book_id = max((book.book_id for book in self.book), default=0) + 1
-        self.book.append(Book(book_id=book_id, title=title, author=author, year=year, status=True))
-        self.save_book()
+        try:
+            year = int(year) # является ли год числом
+            self.book.append(Book(book_id=book_id, title=title, author=author, year=year, status=True))
+            self.save_book()
+        except ValueError:
+            print("Неправильный год. Введите год числом\n")
 
     def remove_book(self, book_id: int):
         """
         :param book_id: номер книги
         Удаляет книгу из библиотеки по ее ID.
         """
-        book_to_delete = next((book for book in self.book if book.book_id == book_id), None)
-        self.book.remove(book_to_delete)
-        self.save_book()
+        try:
+            book_to_delete = next((book for book in self.book if book.book_id == book_id), None)
+            self.book.remove(book_to_delete)
+            self.save_book()
+        except ValueError:
+            print(f"Книга с номером {book_id} не найдена")
 
     def show_all_book(self) -> List[Book]:
         """
@@ -74,7 +82,6 @@ class Library:
                 found_books = [book for book in found_books if value.lower() in getattr(book, key, "").lower()]
             else:
                 found_books = [book for book in found_books if getattr(book, key) == value]
-
         return found_books
 
     def update_status_book(self, book_id: int, new_status: bool):
@@ -83,7 +90,9 @@ class Library:
         :param new_status: статус книги
         Изменяет статус книги.
         """
-        current_book = next((book for book in self.book if book.book_id == book_id), None)
-
-        current_book.status = new_status
-        self.save_book()
+        try:
+            current_book = next((book for book in self.book if book.book_id == book_id), None)
+            current_book.status = new_status
+            self.save_book()
+        except AttributeError:
+            print(f"Книга с номером {book_id} не найдена\n")
