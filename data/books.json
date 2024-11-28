@@ -1,9 +1,72 @@
 [
     {
-        "book_id": 1,
-        "title": "Капитанская дочка",
-        "author": "Пушкин",
-        "year": 1973,
+        "book_id": 2,
+        "title": "Гу",
+        "author": "Вл",
+        "year": 2007,
+        "status": true
+    },
+    {
+        "book_id": 4,
+        "title": "fijwqdo",
+        "author": "kjfgokdowq",
+        "year": 1932,
+        "status": true
+    },
+    {
+        "book_id": 5,
+        "title": "dwq",
+        "author": "fwqd",
+        "year": 1234,
+        "status": true
+    },
+    {
+        "book_id": 6,
+        "title": "dwqd",
+        "author": "fgwdq",
+        "year": 1234,
+        "status": true
+    },
+    {
+        "book_id": 7,
+        "title": "вцйв",
+        "author": "цвйв",
+        "year": 234,
+        "status": true
+    },
+    {
+        "book_id": 8,
+        "title": "ffqwd",
+        "author": "fqwd",
+        "year": 234,
+        "status": true
+    },
+    {
+        "book_id": 9,
+        "title": "fqwd",
+        "author": "fqwd",
+        "year": "fqwd",
+        "status": true
+    },
+    {
+        "book_id": 10,
+        "title": "wdfq",
+        "author": "fwqd",
+        "year": 123,
+        "status": true
+    },
+    {
+        "book_id": 11,
+        "title": "wdfq",
+        "author": "fwqd",
+        "year": 123,
+        "status": true
+    },
+    {
+        "book_id": 12,
+        "title": "fwqd",
+        "author": "fqwd",
+        "year": 2123,
         "status": true
     }
 ]
